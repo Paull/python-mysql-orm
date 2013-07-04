@@ -34,3 +34,6 @@ or like this
 
 ##more help
 The CodeIgniter activerecord user guide please visit [http://ellislab.com/codeigniter/user-guide/database/active_record.html]
+
+##notice
+the function from() in ci is renamed to table() for avoiding compatible problem , it is a key word in python
