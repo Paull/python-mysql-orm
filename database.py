@@ -1,4 +1,3 @@
-import config
 import MySQLdb
 import MySQLdb.cursors
 import time
@@ -2791,14 +2790,14 @@ class Database:
 if __name__ == '__main__':
     db = Database()
 
-    # condition = {'id':10, 'email': 'hello3@qq.com'}
-    # data = {'password': 'hell234word', 'salt': 'ni234d', 'active': 'verified'}
+#     condition = {'id':10, 'email': 'hello3@qq.com'}
+#     data = {'password': 'hell234word', 'salt': 'ni234d', 'active': 'verified'}
 
-    # db.table('member').set(data).where(condition)
-    # db.set({'nickname': 'PPPP'})
-    # print db.update()
+#     db.table('member').set(data).where(condition)
+#     db.set({'nickname': 'PPPP'})
+#     print db.update()
 
-    # print db.num_rows()
+#     print db.num_rows()
 
     while True:
         try:
