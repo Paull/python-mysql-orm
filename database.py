@@ -1,3 +1,4 @@
+import config
 import MySQLdb
 import MySQLdb.cursors
 import time
@@ -11,7 +12,7 @@ class Database:
     """a python mysql query builder in codeIgniter activerecord style"""
     
 
-    def __init__(self, dbhost='localhost', dbuser='root', dbpass='root', dbname='test', prefix='', charset='utf8'):
+    def __init__(self, dbhost=config.database.DBHOST, dbuser=config.database.DBUSER, dbpass=config.database.DBPASS, dbname=config.database.DBNAME, prefix=config.database.PREFIX, charset=config.database.CHARSET):
         """Initialize the database connection"""
         self._dbhost = dbhost
         self._dbuser = dbuser

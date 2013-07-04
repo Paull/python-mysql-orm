@@ -16,17 +16,19 @@ You can interact with the database using many of the active record functions tha
 
 ##usage
 
-1.first of all, you have to import the database module
+1.first of all, you have to configure your database in config.py
 
-2.make a instance of the class to initialize a database connection: db = Database()
+2.just run database.py as a console or import the database module then follow the setp3 and setp4
 
-3.call functions in the class just like we do in codeigniter
+3.make a instance of the class to initialize a database connection: db = Database()
 
+4.call functions in the class just like we do in codeigniter
+
+##examples
+you can put them in your py codes or type them in the console(run database.py directly)
 	dating_target = db.table('employee').select('firstname, lastname, email, mobile').where('age <', 25).where('gender', 'female').order_by('age', 'asc').limit(10, 20).get().reulst()
 	print dating_target
-
 or like this
-
 	db.talbe('employee')
 	db.where({'firstname':'Paul', 'age >': 28, })
 	db.get()
