@@ -12,9 +12,10 @@ class Database:
     """a python mysql query builder in codeIgniter activerecord style"""
     
 
-    def __init__(self, dbhost=config.database.DBHOST, dbuser=config.database.DBUSER, dbpass=config.database.DBPASS, dbname=config.database.DBNAME, prefix=config.database.PREFIX, charset=config.database.CHARSET):
+    def __init__(self, dbhost=config.database.DBHOST, dbport=config.database.DBPORT, dbuser=config.database.DBUSER, dbpass=config.database.DBPASS, dbname=config.database.DBNAME, prefix=config.database.PREFIX, charset=config.database.CHARSET):
         """Initialize the database connection"""
         self._dbhost = dbhost
+        self._dbport = int(dbport)
         self._dbuser = dbuser
         self._dbpass = dbpass
         self._dbname = dbname
@@ -106,7 +107,7 @@ class Database:
 
     def connect(self):
         try:
-            self._conn = MySQLdb.connect(self._dbhost, self._dbuser, self._dbpass, self._dbname, charset = self._charset, cursorclass = MySQLdb.cursors.DictCursor)
+            self._conn = MySQLdb.connect(host=self._dbhost, user=self._dbuser, passwd=self._dbpass, db=self._dbname, port=self._dbport, charset = self._charset, cursorclass = MySQLdb.cursors.DictCursor)
             print "#db connected."
             return True
         except MySQLdb.OperationalError as error:
@@ -132,7 +133,7 @@ class Database:
         try:
             if self._conn:
                 self._conn.ping()
-                print "#ping success"
+                #print "#ping success"
                 self._cursor = self._conn.cursor()
                 return True
             else:
@@ -2451,7 +2452,6 @@ class Database:
         except MySQLdb.OperationalError as error:
             print "#OperationalError:%s" % error
             return False
-            pass
         except MySQLdb.IntegrityError as error:
             print "#IntegrityError:%s" % error
             return False
@@ -2790,6 +2790,8 @@ class Database:
 
 if __name__ == '__main__':
     db = Database()
+    if not db._conn:
+        exit(0)
 
 #     condition = {'id':10, 'email': 'hello3@qq.com'}
 #     data = {'password': 'hell234word', 'salt': 'ni234d', 'active': 'verified'}
