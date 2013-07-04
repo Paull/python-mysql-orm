@@ -15,7 +15,6 @@ Use it to integrate a activerecord mysql database into your python application.
 You can interact with the database using many of the active record functions that CodeIgniter provides.
 
 ##usage
-
 1.first of all, you have to configure your database in config.py
 
 2.just run database.py as a console or import the database module then follow the setp3 and setp4
@@ -24,11 +23,17 @@ You can interact with the database using many of the active record functions tha
 
 4.call functions in the class just like we do in codeigniter
 
+##notice
+the function from() in ci is renamed to table() for avoiding compatible problem , it is a key word in python
+
 ##examples
 you can put them in your py codes or type them in the console(run database.py directly)
+
 	dating_target = db.table('employee').select('firstname, lastname, email, mobile').where('age <', 25).where('gender', 'female').order_by('age', 'asc').limit(10, 20).get().reulst()
 	print dating_target
+	
 or like this
+
 	db.talbe('employee')
 	db.where({'firstname':'Paul', 'age >': 28, })
 	db.get()
@@ -36,6 +41,3 @@ or like this
 
 ##more help
 The CodeIgniter activerecord user guide please visit [http://ellislab.com/codeigniter/user-guide/database/active_record.html]
-
-##notice
-the function from() in ci is renamed to table() for avoiding compatible problem , it is a key word in python
