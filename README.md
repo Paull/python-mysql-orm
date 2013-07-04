@@ -1,10 +1,8 @@
-##You are welcome to make it better!
-
-this a python mysql query builder module in codeIgniter active record style
+This a mysql query builder python module in codeIgniter active record style
 
 version 0.1 of this module has been tested in production environment for several days
 
-if you found any bugs or have any suggestions, don not hesitate to let me know, I will do my best to fix them.
+if you found any bugs or have any suggestions, don not hesitate to let me know, I will do my best to fix them. And you are welcome to make it better!
 
 ---
 
