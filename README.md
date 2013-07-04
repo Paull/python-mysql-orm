@@ -39,7 +39,7 @@ you can put them in your py codes or type them in the console(run database.py di
 or like this
 
 	db.talbe('employee')
-	db.where({'firstname':'Paul', 'age >': 28, })
+	db.where({'firstname':'Paul', 'age >': 28})
 	db.get()
 	print db.row()
 
