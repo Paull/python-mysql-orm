@@ -1,8 +1,10 @@
+##You are welcome to make it better!
+
 this a python mysql query builder module in codeIgniter active record style
 
 version 0.1 of this module has been tested in production environment for several days
 
-if you found any bugs or have any suggestions, don not hesitate to let me know, I will do my best to fix them. And you are welcome to make it better!
+if you found any bugs or have any suggestions, don not hesitate to let me know, I will do my best to fix them.
 
 ---
 
@@ -15,8 +17,8 @@ Use it to integrate a activerecord mysql database into your python application.
 You can interact with the database using many of the active record functions that CodeIgniter provides.
 
 ##Dependency
-* Python 2.7 enviroment. get it from[http://www.python.org/getit/]
-* MySQL for Python. get it from[http://sourceforge.net/projects/mysql-python/files/mysql-python/1.2.3/]
+* Python 2.7 Environment. get it from [http://www.python.org/getit/]
+* MySQL for Python. get it from [http://sourceforge.net/projects/mysql-python/files/mysql-python/1.2.3/]
 
 ##Usage
 run as a console or import it as a module
