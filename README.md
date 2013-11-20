@@ -1,6 +1,6 @@
 This a Mysql orm/query builder Python module in [CodeIgniter activerecord][] style
 
-version 0.1 of this module has been tested in production environment for several days
+version 0.1 of this module has been tested in production environment for months and running stably!
 
 if you found any bugs or have any suggestions, don not hesitate to let me know, I will do my best to fix them. And you are welcome to make it better!
 
