@@ -20,6 +20,7 @@ class Database:
         self._dbpass = dbpass
         self._dbname = dbname
         self._charset = charset
+        self.db_debug = False
 
         # from DB_active_rec.php
         self.ar_select              = []
@@ -456,7 +457,7 @@ class Database:
          * @return  void
         """
 
-        return end(self.queries)
+        return self.queries[-1]
 
 
     # --------------------------------------------------------------------
@@ -2327,6 +2328,7 @@ class Database:
         if query_result == False:
             if self.save_queries == True:
                 self.query_times.append(0)
+            
 
             # This will trigger a rollback if transactions are being used
             self._trans_status = False
@@ -2378,6 +2380,10 @@ class Database:
             # {
             #     self.CACHE->delete()
             # }
+            try:
+                self._conn.commit()
+            except:
+                self._conn.rollback()
 
             return True
 
