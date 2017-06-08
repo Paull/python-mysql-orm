@@ -14,11 +14,11 @@ Use it to integrate a activerecord mysql database into your python application.
 
 You can interact with the database using many of the activerecord functions that CodeIgniter provides.
 
-##Dependency
+## Dependency
 * [Python 2.7][].
 * [MySQL for Python][].
 
-##Usage
+## Usage
 run it directly as a console or import it as a module
 
 [![screenshot](https://raw.github.com/Paull/python-mysql-activerecord/master/screenshot.png)](https://github.com/Paull/python-mysql-activerecord)
@@ -29,25 +29,29 @@ run it directly as a console or import it as a module
 * 3.make a instance of the class to initialize a database connection: db = Database()
 * 4.call functions just like we do in codeigniter
 
-##Notice
-the function from() in CodeIgniter is renamed to table() here, for avoiding compatible problem as it is a key word in python.
+## Notice
+the function from() in CodeIgniter is renamed to table() as 'from' is a key word in python.
 
-##Examples
-you can put them in your py codes or type them in the console(run database.py directly)
+## Examples
+run an instance
+```
+import Database from database
+db = db = Database()
+dating_target = db.table('employee').select('firstname, lastname, email, mobile').where('age <', 25).where('gender', 'female').order_by('age', 'asc').limit(10, 20).get().reulst()
+print dating_target
+```
+or run database.py directly as a console
+```
+db.talbe('employee')
+db.where({'firstname':'Paul', 'age >': 28})
+db.get()
+print db.row()
+```
 
-	dating_target = db.table('employee').select('firstname, lastname, email, mobile').where('age <', 25).where('gender', 'female').order_by('age', 'asc').limit(10, 20).get().reulst()
-	print dating_target
-or like this
-
-	db.talbe('employee')
-	db.where({'firstname':'Paul', 'age >': 28})
-	db.get()
-	print db.row()
-
-##More Help
+## More Help
 please visit the [CodeIgniter activerecord][] user guide.
 
 
 [Python 2.7]: http://www.python.org/getit/
 [MySQL for Python]: http://sourceforge.net/projects/mysql-python/files/mysql-python/1.2.3/
-[CodeIgniter activerecord]: http://ellislab.com/codeigniter/user-guide/database/active_record.html
+[CodeIgniter activerecord]: http://www.codeigniter.com/userguide2/database/active_record.html
