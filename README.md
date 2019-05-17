@@ -15,7 +15,7 @@ Use it to integrate a activerecord mysql database into your python application.
 You can interact with the database using many of the activerecord functions that CodeIgniter provides.
 
 ## Dependency
-* [Python 2.7][].
+* [Python 2.7/3.5+][].
 * [MySQL for Python][].
 
 ## Usage
@@ -37,7 +37,7 @@ run an instance
 ```
 import Database from database
 db = db = Database()
-dating_target = db.table('employee').select('firstname, lastname, email, mobile').where('age <', 25).where('gender', 'female').order_by('age', 'asc').limit(10, 20).get().reulst()
+dating_target = db.table('employee').select('firstname, lastname, email, mobile').where('age <', 25).where('gender', 'female').order_by('age', 'asc').limit(10, 20).get().result()
 print dating_target
 ```
 or run database.py directly as a console
@@ -52,6 +52,6 @@ print db.row()
 please visit the [CodeIgniter activerecord][] user guide.
 
 
-[Python 2.7]: http://www.python.org/getit/
+[Python 2.7/3.5+]: http://www.python.org/getit/
 [MySQL for Python]: http://sourceforge.net/projects/mysql-python/files/mysql-python/1.2.3/
 [CodeIgniter activerecord]: http://www.codeigniter.com/userguide2/database/active_record.html
