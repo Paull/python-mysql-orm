@@ -109,15 +109,15 @@ class Database:
     def connect(self):
         try:
             self._conn = MySQLdb.connect(host=self._dbhost, user=self._dbuser, passwd=self._dbpass, db=self._dbname, port=self._dbport, charset = self._charset, cursorclass = MySQLdb.cursors.DictCursor)
-            print "#db connected."
+            print("#db connected.")
             return True
         except MySQLdb.OperationalError as error:
             self._conn = None
-            print "#OperationalError:%s" % error
+            print("#OperationalError:%s" % error)
             return False
         except:
             self._conn = None
-            print traceback.format_exc()
+            print(traceback.format_exc())
             return False
 
 
@@ -138,15 +138,15 @@ class Database:
                 self._cursor = self._conn.cursor()
                 return True
             else:
-                print "#_conn Type Error, reconnect"
+                print("#_conn Type Error, reconnect")
                 self.connect()
                 return False
         except MySQLdb.OperationalError as error:
-            print "#OperationalError:%s, reconnect." % error
+            print("#OperationalError:%s, reconnect." % error)
             self.connect()
             return False
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
             self.connect()
             return False
 
@@ -514,7 +514,7 @@ class Database:
         """
 
         if isinstance(string, dict):
-            for key,val in string.iteritems():
+            for key,val in string.items():
                 string[key] = self.escape_str(val, like)
             return string
 
@@ -529,7 +529,7 @@ class Database:
             string = string.replace('%', '\\%')
             string = string.replace('_', '\\_')
 
-        return string
+        return string.decode('utf-8')
 
 
     # --------------------------------------------------------------------
@@ -627,7 +627,7 @@ class Database:
         if isinstance(item, list):
             escaped_array = []
 
-            for k,v in item.iteritems():
+            for k,v in item.items():
                 escaped_array[self._protect_identifiers(k)] = self._protect_identifiers(v)
 
             return escaped_array
@@ -662,7 +662,7 @@ class Database:
             # we have nothing more to do other than escape the item
             if parts[0] in self.ar_aliased_tables:
                 if protect_identifiers == True:
-                    for key,val in parts.iteritems():
+                    for key,val in parts.items():
                         if val not in self._reserved_identifiers:
                             parts[key] = self._escape_identifiers(val)  #TODO: not convert yet
                     item = '.'.join(parts)
@@ -1037,7 +1037,7 @@ class Database:
         if not isinstance(escape, bool):
             escape = self.__protect_identifiers
 
-        for k,v in key.iteritems():
+        for k,v in key.items():
             # Convert int value to str value
             if isinstance(v, int):
                 v = str(v)
@@ -1262,7 +1262,7 @@ class Database:
         if not isinstance(field, dict):
             field = {field: match}
 
-        for k,v in field.iteritems():
+        for k,v in field.items():
             k = self._protect_identifiers(k)
 
             prefix = '' if len(self.ar_like) == 0 else type
@@ -1362,7 +1362,7 @@ class Database:
         if not isinstance(key, dict):
             key = {key: value}
 
-        for k,v in key.iteritems():
+        for k,v in key.items():
 
             prefix = '' if len(self.ar_having) == 0 else type
 
@@ -1496,7 +1496,7 @@ class Database:
         if not isinstance(key, dict):
             key = {key: value}
 
-        for k,v in key.iteritems():
+        for k,v in key.items():
             # Convert int value to str value
             if v and isinstance(v, int):
                 v = str(v)
@@ -1881,7 +1881,7 @@ class Database:
         """
 
         valstr = []
-        for key,val in values.iteritems():
+        for key,val in values.items():
             # Convert int val to str val
             if isinstance(val, int):
                 val = str(val)
@@ -2456,13 +2456,13 @@ class Database:
                     self._execute(sql)
                     return True
         except MySQLdb.OperationalError as error:
-            print "#OperationalError:%s" % error
+            print("#OperationalError:%s" % error)
             return False
         except MySQLdb.IntegrityError as error:
-            print "#IntegrityError:%s" % error
+            print("#IntegrityError:%s" % error)
             return False
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
             return False
 
 
@@ -2615,7 +2615,7 @@ class Database:
          * @param   array   An array of fields to reset
          * @return  void
         """
-        for item,default_value in ar_reset_items.iteritems():
+        for item,default_value in ar_reset_items.items():
             if item not in self.ar_store_array:
                 setattr(self, item, default_value)
 
@@ -2707,7 +2707,7 @@ class Database:
             if self._cursor:
                 data = self._cursor.rowcount
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
         finally:
             if self._cursor:
                 self._cursor.close()
@@ -2730,7 +2730,7 @@ class Database:
             if self._cursor:
                 data = self._cursor.lastrowid
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
         finally:
             if self._cursor:
                 self._cursor.close()
@@ -2753,7 +2753,7 @@ class Database:
             if self._cursor:
                 data = self._cursor.rowcount
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
         finally:
             if self._cursor:
                 self._cursor.close()
@@ -2769,7 +2769,7 @@ class Database:
             if self._cursor:
                 data = self._cursor.fetchone()
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
         finally:
             if self._cursor:
                 self._cursor.close()
@@ -2785,7 +2785,7 @@ class Database:
             if self._cursor:
                 data = self._cursor.fetchall()
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
         finally:
             if self._cursor:
                 self._cursor.close()
@@ -2810,12 +2810,12 @@ if __name__ == '__main__':
 
     while True:
         try:
-            data = raw_input('>')
+            data = input('>')
             if data == 'exit':
                 break
             else:
-                exec data
+                exec(data)
         except EOFError:
             break
         except:
-            print traceback.format_exc()
+            print(traceback.format_exc())
