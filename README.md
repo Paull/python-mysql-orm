@@ -1,18 +1,16 @@
-This a Mysql orm/query builder Python module in [CodeIgniter activerecord][] style
+This a Mysql orm/query builder Python module in [CodeIgniter activerecord][] style.
 
-version 0.2 of this module has been tested in production environment for months and running stably!
+It is designed for personal projects and has been tested in production environments, running steady, for years.
 
-if you found any bugs or have any suggestions, don not hesitate to let me know, I will do my best to fix them. And you are welcome to make it better!
+If you found any bugs or have any suggestions, do not hesitate to let me know, I will do my best to fix them. And you are welcome to make it better!
 
 ---
 
 # Python Mysql Active Record
 
-This is an activerecord module inspired from CodeIgniter activerecord and database driver library.
+This is an activerecord module inspired by CodeIgniter activerecord and its database driver library.
 
-Use it to integrate a activerecord mysql database into your python application.
-
-You can interact with the database using many of the activerecord functions that CodeIgniter provides.
+Interacting with mysql in CodeIgniter way that you can do CURD like a pro in your python application.
 
 ## Dependency
 * [Python 2.7/3.5+][].
