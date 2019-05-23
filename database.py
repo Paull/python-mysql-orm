@@ -6,21 +6,22 @@ import traceback
 import re
 from php2python import *
 
-__version__ = "0.1"
+__version__ = "0.3"
     
 class Database:
     """a python mysql query builder in codeIgniter activerecord style"""
     
-
-    def __init__(self, dbhost=config.database.DBHOST, dbport=config.database.DBPORT, dbuser=config.database.DBUSER, dbpass=config.database.DBPASS, dbname=config.database.DBNAME, prefix=config.database.PREFIX, charset=config.database.CHARSET):
-        """Initialize the database connection"""
-        self._dbhost = dbhost
-        self._dbport = int(dbport)
-        self._dbuser = dbuser
-        self._dbpass = dbpass
-        self._dbname = dbname
-        self._charset = charset
-        self.db_debug = False
+    def __init__(self, config_class=None):
+        """ Read Config"""
+        autoinit = False
+        if config_class:
+            """ From object"""
+            self.set_config(config_class)
+            autoinit = config_class.autoinit
+        else:
+            """From configuration class"""
+            self.init_config()
+            autoinit = config.database.autoinit
 
         # from DB_active_rec.php
         self.ar_select              = []
@@ -58,7 +59,6 @@ class Database:
         self.ar_cache_no_escape     = []
 
         # from DB_driver.php
-        self.dbprefix       = prefix
         self.swap_pre       = ''
         self.benchmark      = 0
         self.query_count    = 0
@@ -80,8 +80,7 @@ class Database:
         self.__protect_identifiers   = True
         self._reserved_identifiers  = ['*'] # Identifiers that should NOT be escaped
 
-        # from mysql_driver.php
-        self.dbdriver = 'mysql'
+        
         # The character used for escaping
         self._escape_char = '`'
 
@@ -101,23 +100,55 @@ class Database:
         self._random_keyword = ' RAND()' # database specific random keyword
 
         self._cursor = None
-        self.connect()
 
+        if autoinit:
+            self.connect()
 
-    # --------------------------------------------------------------------
+    def init_config(self):
+        self._dbhost = config.database.hostname
+        self._dbport = int(config.database.port)
+        self._dbuser = config.database.username
+        self._dbpass = config.database.password
+        self._dbname = config.database.database
+        self._charset = config.database.charset
+        self.db_debug = config.database.dbdebug
+
+        # from mysql_driver.php
+        self.dbdriver = config.database.dbdriver
+
+        # from DB_driver.php
+        self.dbprefix       = config.database.dbprefix
+
+    def set_config(self, config_class):
+        self._dbhost = config_class.hostname
+        self._dbport = int(config_class.port)
+        self._dbuser = config_class.username
+        self._dbpass = config_class.password
+        self._dbname = config_class.database
+        self._charset = config_class.charset
+        self.db_debug = config_class.dbdebug
+
+        # from mysql_driver.php
+        self.dbdriver = config_class.dbdriver
+
+        # from DB_driver.php
+        self.dbprefix = config_class.dbprefix
 
     def connect(self):
         try:
             self._conn = MySQLdb.connect(host=self._dbhost, user=self._dbuser, passwd=self._dbpass, db=self._dbname, port=self._dbport, charset = self._charset, cursorclass = MySQLdb.cursors.DictCursor)
-            print("#db connected.")
+            if self.db_debug:
+                print("#db connected.")
             return True
         except MySQLdb.OperationalError as error:
             self._conn = None
-            print("#OperationalError:%s" % error)
+            if self.db_debug:
+                print("#OperationalError:%s" % error)
             return False
         except:
             self._conn = None
-            print(traceback.format_exc())
+            if self.db_debug:
+                print(traceback.format_exc())
             return False
 
 
@@ -134,19 +165,21 @@ class Database:
         try:
             if self._conn:
                 self._conn.ping()
-                #print "#ping success"
                 self._cursor = self._conn.cursor()
                 return True
             else:
-                print("#_conn Type Error, reconnect")
+                if self.db_debug:
+                    print("#_conn Type Error, reconnect")
                 self.connect()
                 return False
         except MySQLdb.OperationalError as error:
-            print("#OperationalError:%s, reconnect." % error)
+            if self.db_debug:
+                print("#OperationalError:%s, reconnect." % error)
             self.connect()
             return False
         except:
-            print(traceback.format_exc())
+            if self.db_debug:
+                print(traceback.format_exc())
             self.connect()
             return False
 
